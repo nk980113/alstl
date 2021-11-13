@@ -1,0 +1,32 @@
+{
+  "name": "alstl",
+  "version": "0.0.0",
+  "description": "A language for all styles",
+  "bin": {
+    "alstl": "./dist/bin/index.js"
+  },
+  "main": "./dist/compiler/index.js",
+  "exports": {
+    "./compiler": {
+      "require": "./dist/compiler/index.js",
+      "import": "./esm_export/compiler.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/readline-sync": "^1.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.2.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "commander": "^8.3.0",
+    "readline-sync": "^1.4.10"
+  }
+}
