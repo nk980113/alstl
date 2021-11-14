@@ -1,18 +1,10 @@
 #!/usr/bin/env node
 
-import { existsSync, writeFileSync, readFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { Command } from 'commander';
 import * as rls from 'readline-sync';
 import { CompilerOptions } from '../utils';
-import { compile } from '../compiler';
-interface pj {
-    name: string;
-    author: string;
-    description: string;
-    version: string;
-    compilerOptions: CompilerOptions;
-}
 
 const pg = new Command;
 pg
@@ -21,6 +13,13 @@ pg
     .action(() => {
         if (existsSync(join(process.cwd(), 'alsp.json'))) {
             if (!rls.keyInYN('Do you want to override the file?')) return;
+        }
+        interface pj {
+            name: string;
+            author: string;
+            description: string;
+            version: string;
+            compilerOptions: CompilerOptions;
         }
         const alsp: pj = {
             name: '',
@@ -31,7 +30,6 @@ pg
                 main: '',
                 easilyRead: false,
                 oneFile: true,
-                code: 'js-cjs',
             }
         };
         const dir = basename(process.cwd());
@@ -101,22 +99,8 @@ pg
         alsp.compilerOptions.main = rls.question('Main file and the entry point: (index.alstl)');
         alsp.compilerOptions.oneFile = <boolean>rls.keyInYN('Compile into a file?');
         alsp.compilerOptions.easilyRead = <boolean>rls.keyInYN('Make the result easy to read?');
-        {
-            const k = rls.keyIn('Program type: [J]S-cjs/JS-[e]sm/[T]S ', { limit: 'jet' });
-            if (k === 'j') alsp.compilerOptions.code = 'js-cjs';
-            else if (k === 'e') alsp.compilerOptions.code = 'js-esm';
-            else if (k === 't') alsp.compilerOptions.code = 'ts';
-        }
         
         writeFileSync(join(process.cwd(), 'alsp.json'), JSON.stringify(alsp));
-    });
-pg
-    .command('compile')
-    .description('Compile the project.')
-    .action(() => {
-        if (existsSync(join(process.cwd(), 'alsp.json'))) return console.log('Please use `alstl init` to initialize the project.');
-        const { compilerOptions: options } = <pj>JSON.parse(readFileSync(join(process.cwd(), 'alsp.json'), { encoding: 'utf-8' }));
-        compile(options);
     });
 
 pg.parse();

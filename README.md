@@ -1,1 +1,2 @@
-# [Please go to the wiki for more information.](https://github.com/nk980113/alstl/wiki)
+# alstl
+ A language for all styles
