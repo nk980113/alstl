@@ -12,6 +12,10 @@
       "import": "./esm_export/compiler.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nk980113/alstl.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,5 +32,6 @@
   "dependencies": {
     "commander": "^8.3.0",
     "readline-sync": "^1.4.10"
-  }
+  },
+  "homepage": "https://github.com/nk980113/alstl/wiki"
 }
